@@ -1,11 +1,11 @@
 {
-  "presets": [["@babel/preset-env", { "modules": false }], "@babel/preset-react", "@babel/preset-flow"],
+  "presets": [["@babel/preset-env", { "modules": false }], "@babel/preset-flow"],
   "plugins": [
-    "@babel/plugin-syntax-dynamic-import",
+        "dynamic-import-node",
     ["@babel/plugin-proposal-decorators",{ "legacy": true }],
     "@babel/plugin-proposal-class-properties",
-    "react-hot-loader/babel",
-    "@babel/plugin-transform-flow-strip-types"
+    "@babel/plugin-transform-flow-strip-types",
+        "add-module-exports"
   ],
   "env": {
     "commonjs": {
@@ -14,27 +14,16 @@
         "dynamic-import-node",
         ["@babel/plugin-proposal-decorators",{ "legacy": true }],
         "@babel/plugin-proposal-class-properties",
-        "add-module-exports",
-        [
-          "webpack-alias",
-          {
-            "config": "./webpack.config.js"
-          }
-        ]
+        "add-module-exports"
       ]
     },
     "test": {
-      "presets": ["@babel/preset-env", "@babel/preset-react", "@babel/preset-flow"],
+      "presets": ["@babel/preset-env", "@babel/preset-flow"],
       "plugins": [
-        "@babel/plugin-syntax-dynamic-import",
+        "dynamic-import-node",
         ["@babel/plugin-proposal-decorators",{ "legacy": true }],
         "@babel/plugin-proposal-class-properties",
-        [
-          "webpack-alias",
-          {
-            "config": "./webpack.config.js"
-          }
-        ]
+        "add-module-exports"
       ]
     }
   }
