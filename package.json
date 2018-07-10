@@ -92,5 +92,5 @@
     "node": "10.x",
     "yarn": "1.x"
   },
-  "version": "0.0.1"
+  "version": "0.0.1-rc.0"
 }

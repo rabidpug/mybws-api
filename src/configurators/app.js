@@ -1,4 +1,4 @@
-export default function appConfig ( { get, }, { server, } ) {
+export default function appConfig ( { get, } ) {
   const { loggerMiddleware, } = require( '../lib/logMaker' )
   /* eslint-disable no-unused-vars */
   const errorHandler = (
@@ -23,9 +23,7 @@ export default function appConfig ( { get, }, { server, } ) {
     return res.status( err.output.statusCode ).json( err.output.payload )
   }
 
-  const isProd = server.environment === 'production'
   const express = get( 'express' )
-  const path = get( 'path' )
   const app = express()
   const bodyParser = get( 'bodyParser' )
 
@@ -45,25 +43,9 @@ export default function appConfig ( { get, }, { server, } ) {
 
   app.use( get( 'morgan' )( ':method#$%:status#$%:error#$%:response-time[0]#$%:url#$%:user#$%:body#$%:log#$%:user-agent', { stream: get( 'log' ).stream, } ) )
 
-  // app.use( ( req, res, next ) => {
-  //   req.io = get( 'socket' )
-
-  //   next()
-  // } )
-
   app.use( '/v1', get( 'v1Route' ) )
 
   app.use( '/auth', get( 'authRoute' ) )
-
-  if ( isProd ) {
-    app.use( get( 'favicon' )( path.join( server.path, 'dist', 'favicon.ico' ) ) )
-
-    app.use( express.static( path.join( server.path, 'dist' ) ) )
-
-    app.get( '*', ( req, res ) => {
-      res.sendFile( path.join( server.path, 'dist', 'index.html' ) )
-    } )
-  }
 
   app.use( errorHandler )
 

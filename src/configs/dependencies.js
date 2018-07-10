@@ -9,7 +9,6 @@ const dependencies = [
   { gql: 'apollo-server-express', },
   'graphql',
   'utilibelt',
-  { favicon: 'serve-favicon', },
   { SubscriptionServer: 'subscriptions-transport-ws', },
   { bodyParser: 'body-parser', },
 ]
