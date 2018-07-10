@@ -1,7 +1,7 @@
 {
   "extends": ["eslint:recommended", "plugin:flowtype/recommended", "plugin:import/errors", "plugin:import/warnings"],
   "env": {
-    "browser": true,
+    "node": true,
     "es6": true,
     "jest": true,
     "commonjs": true
@@ -304,23 +304,8 @@
     "vars-on-top": "error",
     "yoda": "error"
   },
-  "overrides": [
-    {
-      "files": ["src/server/**/*.js"],
-      "env": {
-        "node": true
-      },
-      "excludedFiles": "**/*.test.*",
-      "rules": {
-        "func-names": "off"
-      }
-    }
-  ],
   "root": true,
   "settings": {
-    "polyfills": ["fetch", "promise"],
-    "import/resolver": {
-      "webpack": {}
-    }
+    "polyfills": ["fetch", "promise"]
   }
 }

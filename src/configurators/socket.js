@@ -11,7 +11,7 @@ export default function socketConfig ( { get, }, config ) {
 
     socket.write = log.stream.write
 
-    socket.stream = function () {
+    socket.stream = function socketStream () {
       this.write( this.log.getAll() )
     }
 

@@ -196,7 +196,7 @@ export default function userModel ( { get, } ) {
       this._id = v
     } )
 
-  UserSchema.pre( 'save', function ( next ) {
+  UserSchema.pre( 'save', function preSave ( next ) {
     this.lastOnline = new Date()
 
     // const { socketid, } = this

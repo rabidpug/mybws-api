@@ -4,7 +4,7 @@ export default function userInjector ( req, res, next ) {
   if ( user ) {
     const { json, } = res
 
-    res.json = function ( obj ) {
+    res.json = function jsonPatch ( obj ) {
       const data = obj instanceof Buffer ? obj.toJSON() : obj || {}
 
       if ( !data.user ) data.user = {}
