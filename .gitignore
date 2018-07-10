@@ -1,0 +1,15 @@
+#Node
+.vscode/
+node_modules/
+.storybook/
+#project
+coverage/
+dist/
+/lib/
+logs/
+*.code-workspace
+*.log
+/.env
+*.scss.flow
+*.scpt
+*.jenkins
