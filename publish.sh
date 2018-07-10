@@ -1,7 +1,6 @@
 if [ "$1" = "master" ];
 then
-  dir='/var/www/api.mybws.win'
-elif [ "$1" = "next" ];
+  dir='/var/www/api.mybws.win';
 else
   dir='';
 fi

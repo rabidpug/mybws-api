@@ -16,11 +16,8 @@ agent none
                 echo 'installing dependencies'
                 sh 'yarn'
                 echo 'running tests'
-                sh 'yarn test:cssflow'
                 sh 'yarn test:lint'
                 sh 'yarn test:flow'
-                echo 'tests complete, sending coverage'
-                sh 'cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js'
                 echo 'Testing phase complete'
             }
         }
@@ -46,13 +43,6 @@ agent none
             }
 
             options { skipDefaultCheckout() }
-            when {
-                anyOf {
-                    branch 'master'
-                    branch 'next';
-                    branch 'debug'
-                    }
-                }
             steps {
                 echo 'publishing branch '  + env.BRANCH_NAME
                 sh 'chmod +x ./publish.sh'
