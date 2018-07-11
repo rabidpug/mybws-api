@@ -78,7 +78,8 @@
   "repository": "git+https://rabidpug@github.com/rabidpug/mybws-api.git",
   "scripts": {
     "start": "cross-env NODE_ENV=production && node lib",
-    "dev": "cross-env NODE_ENV=development pm2 start process.json && pm2 logs mybws --raw",
+    "server": "cross-env NODE_ENV=development && babel-node src",
+    "dev": "cross-env NODE_ENV=development pm2 start process.json && pm2 logs myBWSapi --raw",
     "build": "run-s clean build:server",
     "clean": "rimraf lib",
     "build:server": "cross-env BABEL_ENV=commonjs NODE_ENV=production babel -d lib src --ignore '**/*.test.*'",

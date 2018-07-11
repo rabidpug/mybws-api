@@ -4,21 +4,20 @@ export default function authRoute ( { get, } ) {
 
   const router = get( 'express' ).Router()
 
-  router.get( '/',
-              get( 'passport' ).authenticate( 'google', {
-                scope: [
-                  'https://www.googleapis.com/auth/plus.login',
-                  'https://www.googleapis.com/auth/plus.profile.emails.read',
-                ],
-                session: false,
-              } ) )
+  router.get( '/', ( req, res, next ) => {
+    const { headers: { referer, }, } = req
 
-  router.get( '/callback',
-              get( 'passport' ).authenticate( 'google', {
-                failureRedirect : '/signin#failed',
-                session         : false,
-              } ),
-              redirect )
+    get( 'passport' ).authenticate( 'google', {
+      scope: [
+        'profile',
+        'email',
+      ],
+      session : false,
+      state   : referer,
+    } )( req, res, next )
+  } )
+
+  router.get( '/callback', get( 'passport' ).authenticate( 'google', { session: false, } ), redirect )
 
   router.post( '/', promiseErrorWrap( refresh ) )
 

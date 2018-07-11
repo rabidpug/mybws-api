@@ -4,6 +4,8 @@ const Instance = get( 'Instance' )
 
 export default class UserController extends Instance {
   sign = async ( req, accessToken, refreshToken, profile, done ) => {
+    const { query: { state, }, } = req
+
     req.log.add( 'request', 'Google authentication' )
 
     try {
@@ -12,8 +14,12 @@ export default class UserController extends Instance {
       const { _id, } = user
       const result = await this.userService.signUser( { _id, }, user, req )
 
+      result.state = state
+
       done( null, result )
     } catch ( err ) {
+      err.state = state
+
       done( null, null, err )
     }
   }
@@ -37,21 +43,12 @@ export default class UserController extends Instance {
 
   redirect = ( req, res ) => {
     const { user, } = req
-    const { token, refreshToken, } = user
-
-    //     const htmlRedirector = `
-    // <html>
-    //   <script>
-    //     window.localStorage.setItem('JWT', '${token}');
-    //     window.localStorage.setItem('refreshToken', '${refreshToken}');
-    //     window.location.href = window.localStorage.getItem('redirect') || '/';
-    //   </script>
-    // </html>`
+    const { token, refreshToken, state, } = user
 
     req.log.add( 'info', 'redirecting client with token' )
 
     res.redirect( require( 'url' ).format( {
-      pathname : req.headers.referer,
+      pathname : state,
       query    : {
         refreshToken,
         token,

@@ -1,12 +1,14 @@
-{
-  "name": "mybws",
-  "script": "npm",
-  "args": "run server -- --color",
-  "log_date_format": "",
-  "env": {
-    "NODE_ENV": "development",
-    "BABEL_ENV": "commonjs"
-  },
-  "watch": "./src/server",
-  "merge_logs": true
-}
+[
+  {
+    "name": "myBWSapi",
+    "script": "npm",
+    "args": "run server -- --color",
+    "log_date_format": "",
+    "env": {
+      "NODE_ENV": "development",
+      "BABEL_ENV": "commonjs"
+    },
+    "watch": "./src",
+    "merge_logs": true
+  }
+]

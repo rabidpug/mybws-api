@@ -43,8 +43,6 @@ export default function appConfig ( { get, } ) {
 
   app.use( get( 'morgan' )( ':method#$%:status#$%:error#$%:response-time[0]#$%:url#$%:user#$%:body#$%:log#$%:user-agent', { stream: get( 'log' ).stream, } ) )
 
-  app.use( '/v1', get( 'v1Route' ) )
-
   app.use( '/auth', get( 'authRoute' ) )
 
   app.use( errorHandler )
