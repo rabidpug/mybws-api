@@ -29,7 +29,6 @@ export default function userModel ( { get, } ) {
       photos: [Stringlist]
       photo: String
       pushSubscriptions: [PushSubs]
-      refreshToken: String
       roles: [Stringlist]
       role: String
       socketid: [String]
@@ -83,14 +82,6 @@ export default function userModel ( { get, } ) {
         key        : Object,
       },
     ],
-    refreshToken: {
-      index    : true,
-      required : false,
-      sparse   : true,
-      trim     : true,
-      type     : String,
-      unique   : true,
-    },
     roles: {
       index    : true,
       required : true,

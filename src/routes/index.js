@@ -3,9 +3,9 @@ const routes = [
   {
     config  : true,
     invoke  : true,
-    v2Route : require( './v2' ),
+    v1Route : require( './v1' ),
   },
-  { resolvers: require( './v2/resolvers' ), },
+  { resolvers: require( './v1/resolvers' ), },
 ]
 
 export default routes

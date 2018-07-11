@@ -69,20 +69,17 @@ export default class UserService extends Instance {
 
   async signUser ( search, newUser, req ) {
     const existUser = await this.User.findOne( search )
+
     const user = existUser || newUser && new this.User( newUser )
 
     if ( user ) {
       const { _id, } = user
-      const token = `JWT ${this.jwt.sign( { _id, }, this.config.localStrategy.secretOrKey || 'secret', { expiresIn: 300, } )}`
-      const noRefreshToken = !user.refreshToken
+
+      const token = `JWT ${this.jwt.sign( { _id, }, this.config.localStrategy.secretOrKey || 'secret', { expiresIn: 900, } )}`
+      const refreshToken = `JWT ${this.jwt.sign( { _id, }, this.config.localStrategy.secretOrKey || 'secret', { expiresIn: 10800, } )}`
       const checkForUpdates = existUser && newUser
       let hasUpdates = false
 
-      if ( noRefreshToken ) {
-        const refreshToken = user.googleid + this.bcrypt.genSaltSync( 10 )
-
-        user.refreshToken = refreshToken
-      }
       if ( checkForUpdates ) {
         const [
           emails,
@@ -117,7 +114,10 @@ export default class UserService extends Instance {
 
         hasUpdates = emails.length + names.length + photos.length > 0
       }
-      if ( noRefreshToken || hasUpdates ) await user.save( req )
+
+      await user.save( req )
+
+      user.refreshToken = refreshToken
 
       user.token = token
 

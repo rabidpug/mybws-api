@@ -19,7 +19,7 @@ export default function authRoute ( { get, } ) {
 
   router.get( '/callback', get( 'passport' ).authenticate( 'google', { session: false, } ), redirect )
 
-  router.post( '/', promiseErrorWrap( refresh ) )
+  router.post( '/', get( 'passport' ).authenticate( 'jwt', { session: false, } ), promiseErrorWrap( refresh ) )
 
   return router
 }

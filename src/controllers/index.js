@@ -9,6 +9,7 @@ const controllers = [
       'boom',
       'mongoose',
       'webpush',
+      'jwt',
       'userService',
     ],
     userController: require( './user' ),

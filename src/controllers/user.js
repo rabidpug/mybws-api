@@ -28,15 +28,13 @@ export default class UserController extends Instance {
     req.log.add( 'request', 'JWT validation' )
 
     const expirationDate = new Date( jwtPayload.exp * 1000 )
-    const { headers: { refreshtoken: refreshToken, }, } = req
 
     const { _id, } = jwtPayload
 
-    const search = expirationDate < new Date() ? { refreshToken, } : { _id, }
+    const isInvalid = expirationDate < new Date()
 
-    search.refreshToken && req.log.add( 'warn', `Token expired, using refresh token` )
-
-    const result = await this.userService.signUser( search, null, req )
+    if ( !_id || isInvalid ) done( null, null )
+    const result = await this.userService.signUser( { _id, }, null, req )
 
     done( null, result )
   }
@@ -106,14 +104,11 @@ export default class UserController extends Instance {
   refresh = async ( req, res ) => {
     req.log.add( 'request', 'refresh token' )
 
-    const { headers: { refreshtoken: refreshToken, }, } = req
-    const user = await this.userService.signUser( { refreshToken, }, null, req )
+    const { user, } = req
 
     res.json( {
-      user: {
-        ...user,
-        token: user.token,
-      },
+      refreshToken : user.refreshToken,
+      token        : user.token,
     } )
   }
 
