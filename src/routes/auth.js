@@ -5,7 +5,7 @@ export default function authRoute ( { get, } ) {
   const router = get( 'express' ).Router()
 
   router.get( '/', ( req, res, next ) => {
-    const { headers: { referer, }, } = req
+    const { query: { redirect, }, } = req
 
     get( 'passport' ).authenticate( 'google', {
       scope: [
@@ -13,7 +13,7 @@ export default function authRoute ( { get, } ) {
         'email',
       ],
       session : false,
-      state   : referer,
+      state   : redirect,
     } )( req, res, next )
   } )
 

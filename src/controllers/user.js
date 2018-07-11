@@ -45,7 +45,7 @@ export default class UserController extends Instance {
 
     req.log.add( 'info', 'redirecting client with token' )
 
-    res.redirect( require( 'url' ).format( {
+    return res.redirect( require( 'url' ).format( {
       pathname : state,
       query    : {
         refreshToken,
