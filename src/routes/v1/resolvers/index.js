@@ -25,10 +25,11 @@ export default function resolvers ( { get, } ) {
               user[key] = value
             }
           }
+          const userModified = await user.save()
 
-          pubsub.publish( USER_MODIFIED, { userModified: user, } )
+          pubsub.publish( USER_MODIFIED, { userModified, } )
 
-          return user.save()
+          return userModified
         },
       },
       Query: {

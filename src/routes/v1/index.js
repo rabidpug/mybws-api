@@ -10,7 +10,7 @@ export default function v2Route ( { get, }, config ) {
   ]
 
   const server = new ApolloServer( {
-    async context ( { req = {}, res, } ) {
+    async context ( { req = {}, } ) {
       if ( req.headers ) {
         try {
           const { authorization: authToken, } = req.headers
