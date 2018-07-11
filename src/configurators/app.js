@@ -41,7 +41,7 @@ export default function appConfig ( { get, } ) {
 
   app.use( get( 'passport' ).initialize() )
 
-  // app.use( get( 'morgan' )( ':method#$%:status#$%:error#$%:response-time[0]#$%:url#$%:user#$%:body#$%:log#$%:user-agent', { stream: get( 'log' ).stream, } ) )
+  app.use( get( 'morgan' )( ':method#$%:status#$%:error#$%:response-time[0]#$%:url#$%:user#$%:body#$%:log#$%:user-agent', { stream: get( 'log' ).stream, } ) )
 
   app.use( '/auth', get( 'authRoute' ) )
 
